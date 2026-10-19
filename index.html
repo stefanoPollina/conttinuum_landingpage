@@ -216,11 +216,9 @@ footer{background:#EFEFEF!important;}
 {id:'mosaic',name:'Continuum Mosaic',repo:'continuum-mosaic',status:'Foundational substrate · Modular sound-design and live performance environment',desc:'A complete modular sound-design and live-performance environment, combining an extensive collection of synthesis architectures, acoustic and percussion modelling, rhythm systems, deep sequencing, sophisticated keyboard performance control, signal routing, patching, mixing, vintage amplifier modelling and shared effects within one interconnected instrument.',features:['Multiple synthesis architectures within one integrated modular environment','Earth Rhythms acoustic and percussion modelling alongside electronic synthesis systems','Rhythm, percussion and sequencing systems for programmed, evolving and live performance structures','Sophisticated keyboard and performance-control architecture','Signal routing, patching and interconnected control across instrument families','Integrated mixing, vintage amplifier modelling, shared effects and final output architecture'],note:'Mosaic is both a complete playable instrument and an integration environment: substantial musical systems coexist inside it, with individual families capable of developing into standalone Continuum instruments in their own right.'}
 ]
 const repo=d=>'https://github.com/stefanoPollina/'+d.repo;
-const awaitingPublication=new Set(['mosaic','rhythm']);
+const awaitingPublication=new Set();
 // GitHub Pages addresses are inferred from repository names; verify deployment before publishing.
-const live=d=>d.id==='rhythm-composer' ? 'https://stefanopollina.github.io/RHYTHM_ENGINE_TR808/' : d.id==='obsidian-signal' ? 'https://stefanopollina.github.io/obsidian-signal-chain/' : (d.id==='mosaic' || d.id==='rhythm')
-  ? 'https://stefanopollina.github.io/'+d.repo+'/'
-  : 'https://stefanopollina.github.io/'+d.repo+'/';
+const live=d=>d.id==='mosaic' ? 'https://stefanopollina.github.io/continuum-mosaic./' : d.id==='rhythm' ? 'https://stefanopollina.github.io/continuum-mosaic-rhythm-engine./' : d.id==='rhythm-composer' ? 'https://stefanopollina.github.io/RHYTHM_ENGINE_TR808/' : d.id==='obsidian-signal' ? 'https://stefanopollina.github.io/obsidian-signal-chain/' : 'https://stefanopollina.github.io/'+d.repo+'/';
 const gallery=document.getElementById('gallery');
 function preview(d){
  if(!d.repo || awaitingPublication.has(d.id))return `<div class="placeholder">Instrument preview awaiting updated publication</div><div class="preview-note"><b>${d.name}</b></div>`;
