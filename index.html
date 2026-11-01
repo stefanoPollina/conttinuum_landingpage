@@ -197,6 +197,13 @@ footer{background:#EFEFEF!important;}
 .instrument-menu{position:absolute;right:0;top:100%;width:min(310px,calc(100vw - 44px));max-height:min(70vh,580px);overflow-y:auto;background:#f5f3ee;color:#242424;border:1px solid #bdbbb5;box-shadow:0 12px 28px #0002;padding:8px;z-index:30;}
 .navlinks .instrument-menu a{display:block;padding:10px 12px;font-size:13px;letter-spacing:0;text-transform:none;line-height:1.4;}
 .navlinks .instrument-menu a:hover,.navlinks .instrument-menu a:focus-visible{background:#e4e1d9;color:#111;outline:2px solid #777;outline-offset:-2px;}
+
+/* Keep the playable preview beside expanded instrument details. */
+@media (min-width:801px){
+ .item:has(.expand[open]){align-items:start;}
+ .item:has(.expand[open]) .visual{position:sticky;top:90px;align-self:start;}
+ .item:has(.expand[open]) .info{align-self:start;}
+}
 </style></head><body><div aria-label="Reserved promotional strip" class="continuum-cta-strip"></div><header><div class="wrap nav"><a class="wordmark" href="#home">CONTINUUM</a><nav class="navlinks"><details class="instrument-dropdown" id="instrument-dropdown"><summary>Instruments</summary><div class="instrument-menu" id="instrument-menu" aria-label="Open an instrument"></div></details><a href="https://github.com/stefanoPollina" rel="noopener" target="_blank">GitHub ↗</a></nav></div></header><main><div class="home" id="home"><section class="hero"><div class="wrap"><h1>An evolving modular performance ecosystem built around accessibility, experimentation and interoperability.</h1><p>Standalone instruments that can be played individually, combined across devices and connected with MIDI, audio, controllers and external hardware as part of a larger live-performance rig.</p></div></section><section class="wrap" id="instruments"><div class="section-head"><h2>Explore the instruments</h2><span>22 instruments &amp; processors · scroll the previews · explore the details</span></div><p class="gallery-playable-note">Synthesizers, rhythm machines and other instruments are fully playable and interactive right here. Explore, experiment and enjoy.</p><div id="gallery"></div></section><section class="wrap" id="about"><div class="about" style="max-width:860px">
 <div class="eyebrow">Beyond the instruments · The Continuum architecture</div>
 <h2>One instrument can stand alone. Several can form a performance rig. Ultimately, the individual components can become nodes within one connected Continuum.</h2>
@@ -263,6 +270,50 @@ function preview(d){
  return `<div class="placeholder">Loading the instrument preview…<br><small>Preview availability depends on the published build.</small></div><iframe title="${d.name} interface preview" loading="eager" tabindex="-1" aria-hidden="true" data-live="${live(d)}"></iframe><div class="preview-note"><b>${d.name}</b></div>`;
 }
 gallery.innerHTML=DATA.map((d,i)=>`<article id="${d.id}" class="item ${d.id==='hybrid'?'item-hybrid':''}"><div class="visual" data-instrument="${d.id}" aria-label="Preview of ${d.name}">${preview(d)}</div><div class="info"><div class="number">${String(i+1).padStart(2,'0')} / ${DATA.length}</div><h3>${d.name}</h3><div class="status">${d.status}</div>${d.id==='hybrid'?'':`<p>${d.desc}</p>`}${d.id==='hybrid'?`<div class="hybrid-legend"><span class="legend-kicker">Theoretical engine-family arrangements</span><strong>≈ 6.28 × 10⁵⁷</strong><p>Eight families · 64 engine slots. Open below for the complete architecture.</p></div>`:''}<details class="expand"><summary>Explore this instrument</summary><div class="expand-body"><p>${d.desc}</p><ul>${d.features.map(f=>`<li>${f}</li>`).join('')}</ul><p class="expand-note">${d.note}</p><div class="actions">${d.id==='vortex'?`<a class="action primary" href="${live(d)}" target="_blank" rel="noopener">Launch alpha prototype ↗</a>`:awaitingPublication.has(d.id)?`<span class="smallprint">Updated instrument URL pending publication.</span>`:d.repo?`<a class="action primary" href="${live(d)}" target="_blank" rel="noopener">Launch instrument ↗</a><a class="action" href="${repo(d)}" target="_blank" rel="noopener">View source ↗</a>`:`<span class="smallprint">Repository link pending confirmation.</span>`}</div></div></details></div></article>`).join('');
+// Embedded instruments must not move the gallery without parent-page navigation.
+function protectGalleryScroll(){
+ let x=window.scrollX,y=window.scrollY,allowUntil=0,budget=0,direction=0,dragging=false,touchY=null;
+ const grant=(distance)=>{
+  const now=performance.now(),sign=Math.sign(distance);
+  if(now>allowUntil || sign!==direction)budget=0;
+  direction=sign;
+  budget=Math.min(window.innerHeight*2,budget+Math.abs(distance)+24);
+  allowUntil=now+700;
+ };
+ const allowNavigation=()=>{budget=Infinity;direction=0;allowUntil=performance.now()+1400;};
+ window.addEventListener('wheel',event=>{
+  const unit=event.deltaMode===1?20:event.deltaMode===2?window.innerHeight:1;
+  grant(event.deltaY*unit);
+ },{capture:true,passive:true});
+ window.addEventListener('touchstart',event=>{touchY=event.touches[0]?.clientY??null;},{capture:true,passive:true});
+ window.addEventListener('touchmove',event=>{
+  const next=event.touches[0]?.clientY;
+  if(touchY!==null && next!==undefined)grant((touchY-next)*2);
+  touchY=next??null;
+ },{capture:true,passive:true});
+ window.addEventListener('keydown',event=>{
+  if(event.target.matches?.('input,textarea,select,[contenteditable="true"]'))return;
+  if(event.key==='Home'||event.key==='End'){allowNavigation();return;}
+  const moves={ArrowUp:-60,ArrowDown:60,PageUp:-window.innerHeight,PageDown:window.innerHeight,' ':window.innerHeight*(event.shiftKey?-1:1)};
+  if(event.key in moves)grant(moves[event.key]);
+ },true);
+ window.addEventListener('pointerdown',event=>{
+  if(event.clientX>=document.documentElement.clientWidth || event.clientY>=document.documentElement.clientHeight){dragging=true;}
+ },true);
+ window.addEventListener('pointerup',()=>{dragging=false;},true);
+ window.addEventListener('click',event=>{if(event.target.closest?.('a[href^="#"]'))allowNavigation();},true);
+ window.addEventListener('hashchange',allowNavigation);
+ window.addEventListener('popstate',allowNavigation);
+ window.addEventListener('resize',()=>{x=window.scrollX;y=window.scrollY;});
+ window.addEventListener('scroll',()=>{
+  const delta=window.scrollY-y,distance=Math.abs(delta);
+  const requested=performance.now()<allowUntil && distance<=budget && (!direction || !delta || Math.sign(delta)===direction);
+  if(dragging || requested){budget=Math.max(0,budget-distance);x=window.scrollX;y=window.scrollY;return;}
+  if(window.scrollX!==x || window.scrollY!==y)window.scrollTo({left:x,top:y,behavior:'instant'});
+ },{passive:true});
+ if(location.hash)allowNavigation();
+}
+protectGalleryScroll();
 // Preview pipeline v2: one scheduler, bounded concurrency, anticipatory loading.
 // Gallery cards and links render immediately; heavyweight remote apps load progressively.
 function initPreview(root){
