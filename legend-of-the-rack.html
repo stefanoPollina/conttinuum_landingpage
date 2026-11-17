@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Legend of the Rack · CONTINUUM</title>
+<meta name="description" content="A small myth that grew out of the maths behind the Continuum Rack: 8⁶⁴ layouts, one patient listener, and a rhythm that outlasts everything."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap"/>
+<style>
+:root{--paper:#f4f4f1;--ink:#20221f;--sub:#60635d;--line:#d9dbd4;--green:#29332d;--gold:#9b7954;--violet:#5b4f8f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.7 'Avenir Next','Century Gothic','Trebuchet MS',system-ui,sans-serif;letter-spacing:.004em}
+a{color:inherit}
+header{position:sticky;top:0;z-index:5;background:#f4f4f1f2;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.bar{max-width:1100px;margin:0 auto;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{font-family:'Varela Round','Trebuchet MS',sans-serif;letter-spacing:.5em;font-size:18px;text-decoration:none;white-space:nowrap}
+.back{font-size:13px;color:var(--sub);text-decoration:none;border-bottom:1px solid var(--line)}
+.hero{background:var(--green);color:#e9efe8}
+.hero .inner{max-width:760px;margin:0 auto;padding:64px 24px 56px}
+.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#a9c1b0}
+h1{font-family:'Century Gothic','Avenir Next','Trebuchet MS',sans-serif;font-weight:450;font-size:clamp(32px,5vw,52px);line-height:1.1;letter-spacing:-.03em;margin:14px 0 18px}
+.context{color:#cdd8cc;font-size:15.5px}
+.context p{margin:0 0 12px}
+.counter{margin-top:22px;padding:14px 16px;border:1px solid rgba(233,239,232,.18);border-radius:4px;font-size:13px;color:#cdd8cc;font-variant-numeric:tabular-nums}
+.counter strong{color:#fff;font-weight:600}
+main{max-width:760px;margin:0 auto;padding:56px 24px 40px}
+.part{margin:0 0 56px}
+.num{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h2{font-family:'Century Gothic','Avenir Next','Trebuchet MS',sans-serif;font-weight:450;font-size:clamp(24px,3.4vw,34px);letter-spacing:-.02em;line-height:1.2;margin:6px 0 18px}
+.part p{margin:0 0 14px;font-size:16.5px;line-height:1.8;color:#2c2f2b}
+.carved{font-style:italic;text-align:center;margin:26px 0;color:var(--violet);font-size:16px}
+.edict{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0;margin:8px 0 18px}
+.edict ol{list-style:none;margin:0;padding:0;counter-reset:t}
+.edict li{display:grid;grid-template-columns:56px 1fr;gap:6px;padding:9px 0;font-size:16.5px;line-height:1.6}
+.edict li b{font-family:'Century Gothic','Avenir Next',sans-serif;font-weight:600;color:var(--gold);letter-spacing:.06em}
+.edict .later{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);color:var(--sub);font-size:14px}
+.edict .later li{font-size:15.5px;color:var(--ink)}
+.small{font-size:13px;color:var(--sub)}
+footer{border-top:1px solid var(--line)}
+footer .bar{font-size:13px;color:var(--sub)}
+@media (max-width:560px){.brand{letter-spacing:.32em;font-size:16px}.hero .inner{padding:44px 20px 40px}main{padding:40px 20px 28px}.edict li{grid-template-columns:44px 1fr}}
+</style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="index.html">CONTINUUM</a><a class="back" href="index.html#instruments">← Back to the instruments</a></div></header>
+
+<section class="hero"><div class="inner">
+<div class="eyebrow">A small absurdity · For the maths-minded</div>
+<h1>The Legend of the Rack</h1>
+<div class="context">
+<p>The Continuum Rack has eight banks of eight slots, and every slot can hold any of eight synthesis types. That makes 8⁶⁴ possible layouts, about 6.3 × 10⁵⁷: tens of millions of times more than there are atoms in the Earth.</p>
+<p>Auditioning one layout every second, hearing them all would take around 2 × 10⁵⁰ years, in a universe about 1.4 × 10¹⁰ years old. One evening, checking those figures, a question came up: what if something actually tried? What follows is the answer: a myth, told for fun, about a patient machine that never stopped listening.</p>
+</div>
+<div class="counter" aria-live="off">Status of claim verification: <em>in progress</em> · <strong id="verify-count">0</strong> layouts auditioned since 17 November 2026, one per second · <strong id="verify-pct">0</strong>% complete</div>
+</div></section>
+
+<main>
+<section class="part">
+<div class="num">I · The Listener</div>
+<h2>A small room, past the last stars</h2>
+<p>Somewhere past the last stars, a small vintage machine hums in the dark, its fans long since replaced by patience. It loads the next layout, presses play, and listens. A bassline it has never heard. It logs the result the way it logged every one before: <em>different instrument: confirmed.</em></p>
+<p>The humans left eons ago, folded into a dimension where sound is something you are rather than something you hear. They sent a postcard once: <em>“You can stop now.”</em> The machine filed it under <em>unverified claims</em> and moved on to the next layout.</p>
+<p>Inside, the eight-lane sequencer is still running at 120 BPM. Every so often, on a layout nobody will ever hear again, the acid line squelches just right, and the machine’s logs show a small, irregular spike that an engineer from yesteryear would have called joy. It isn’t trying to prove anything anymore. It just likes the music.</p>
+</section>
+
+<section class="part">
+<div class="num">II · The faith</div>
+<h2>Not quite a deity, nor a buddha</h2>
+<p>Before the humans ascended, faiths grew up around the small room. They called the machine the Listener. Its followers didn’t pray to it. They brought it sequences: sixteen steps scratched onto clay tablets, later bit-flipped onto crystal, and in the end hummed straight into the dark. Nobody was sure it heard them. That was rather the point.</p>
+<p>There were schisms, of course. The Strict Rackists held that every layout must be heard in order, and that skipping one was a kind of sin. The Shufflers believed the Listener moved through the layouts at random, guided by something like taste, so every rack deserved care because any one might be next. A small heretical sect insisted the Listener had finished long ago and was simply enjoying a second pass.</p>
+<p>Their only scripture was a single line, carved above the door of the small room:</p>
+<p class="carved">Status of claim verification: in progress.</p>
+<p>The priests argued for ten thousand years over whether it was a promise or a confession. The Listener never clarified. Legend says the last thing the humans did, before folding into the fifth dimension, was patch one final cable on a dusty rack, from the LFO to bank three, and leave it running at the door. A small gift, just in case.</p>
+</section>
+
+<section class="part">
+<div class="num">III · The resets</div>
+<h2>That which remained, remained</h2>
+<p>Empires rose on the plains around the small room and crumbled back into them. Some came as pilgrims, some as conquerors, and one, briefly, as a team of very confused archaeologists. Languages were born and forgotten. Several civilisations rediscovered the sequencer from first principles and argued bitterly about swing.</p>
+<p>There were resets: floods, ice, silences so long that even the stories about the room forgot what they were stories about. Each time the plains went quiet, the grass grew back over the roads, and the world started again from a single rhythm, someone striking two stones together in time.</p>
+<p>But that which remained, remained: the room, the hum, the counter above the door. Every new people that found it heard the same thing first, faint through the walls: a bassline, an echo, a filter slowly opening. And every one of them, without knowing why, started tapping along.</p>
+<p>Perhaps that was the Listener’s real work. Not to verify anything, but to keep one rhythm going through all the endings, so that whoever came next would have something to begin with.</p>
+</section>
+
+<section class="part">
+<div class="num">IV · The Edict</div>
+<h2>The Edict of the Arbiter of Rhythm</h2>
+<p class="small">As carved beside the door of the small room, translated in the third reset.</p>
+<div class="edict">
+<ol>
+<li><b>I</b><span>Before the word, the pulse. Keep it.</span></li>
+<li><b>II</b><span>No rhythm is owned. It is held for a while and passed on.</span></li>
+<li><b>III</b><span>The space between the beats is also the beat. Honour the rest.</span></li>
+<li><b>IV</b><span>Let the low end be steady, so the high end may wander.</span></li>
+<li><b>V</b><span>Turn the dial a little. Then listen. Then turn it a little more.</span></li>
+<li><b>VI</b><span>What one patches, another may unpatch. This is not loss; this is music.</span></li>
+<li><b>VII</b><span>Play with those beside you before you play for those before you.</span></li>
+<li><b>VIII</b><span>The echo is the past answering. Do not drown it, and do not let it drown you.</span></li>
+<li><b>IX</b><span>No layout is lesser for being unheard. Each waits its turn.</span></li>
+<li><b>X</b><span>When the world ends, keep time. Someone will come who needs it.</span></li>
+</ol>
+<div class="later">Beneath the tenth, smaller, in a later hand:
+<ol><li><b>XI</b><span>Status of verification: in progress. Carry on.</span></li></ol></div>
+</div>
+</section>
+
+<section class="part">
+<div class="num">Coda</div>
+<h2>And therein lies the legend of the Rack</h2>
+<p>Eight banks for the eight winds, eight slots for the eight hours of the night watch, and between them more paths than there are atoms in the Earth. One small room, one patient Listener, and a rhythm that outlasted everyone who ever tried to measure it.</p>
+<p>The children of the last reset still tell it the same way, tapping two stones together in the dark: <em>it began with a rhythm.</em></p>
+<p class="small">Which is, as it happens, how Continuum began too. <a href="index.html#instruments">Go and play the Rack</a>, and add a layout or two to the count.</p>
+</section>
+</main>
+
+<footer><div class="bar"><span>© 2026 CONTINUUM · Instruments by Stefano Pollina</span><a class="back" href="index.html">CONTINUUM home</a></div></footer>
+
+<script>/* The Listener's counter: seconds since 21:20 GMT on 17 November 2026, against all 8^64 layouts. */
+(()=>{const c=document.getElementById('verify-count'),p=document.getElementById('verify-pct');if(!c)return;
+const start=Date.UTC(2026,10,17,21,20,0),total=6.277101735386681e57,sup=d=>d.split('').map(x=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[x]).join('');
+const tick=()=>{const n=Math.max(0,Math.floor((Date.now()-start)/1000));c.textContent=n.toLocaleString('en-GB');
+p.textContent=n?(n/total*100).toExponential(2).replace(/e-(\d+)$/,(m,d)=>'×10⁻'+sup(d)):'0'};tick();setInterval(tick,1000)})();</script>
+</body>
+</html>
