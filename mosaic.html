@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Mosaic Subtractive / FM · Download · CONTINUUM</title>
+<meta name="description" content="Mosaic Subtractive / FM: a two-layer subtractive and FM synthesizer with a wavetable engine, sixteen sequenced LFOs and a full FX bus. Play it in your browser or download the VST3 for Windows."/>
+<style>
+:root{--paper:#f7f6f2;--white:#fdfcf9;--panel:#f0eee9;--ink:#242723;--sub:#625f5a;--line:#d8d5ce;--green:#53796c;--gold:#aa7d4d;--blue:#608397;--violet:#8c759b;--coral:#b07f70;--dark:#232823}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.64 'Avenir Next','Segoe UI',system-ui,sans-serif;letter-spacing:.004em}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+.skip{position:absolute;top:-100px;left:12px;background:#222;color:white;padding:10px;z-index:999}.skip:focus{top:12px}
+.shell{width:min(1240px,calc(100% - 52px));margin:auto}
+
+/* header + downloads menu (same as the landing page) */
+header{position:sticky;top:0;z-index:80;background:#f7f6f2ef;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{text-decoration:none;letter-spacing:.24em;font-size:18px;font-weight:600;white-space:nowrap;font-family:'Trebuchet MS','Avenir Next',sans-serif}
+.navlinks{display:flex;flex-wrap:wrap;align-items:center;gap:22px}
+.navlinks a,.dl-toggle{text-decoration:none;font-size:11px;font-weight:550;text-transform:none;letter-spacing:.095em;color:#575b53}
+.navlinks a:hover,.dl-toggle:hover{color:var(--ink)}
+.dl{position:relative}
+.dl-toggle{background:none;border:0;padding:0;font:inherit;font-size:11px;font-weight:550;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.dl-toggle::after{content:'';width:5px;height:5px;border-right:1px solid currentColor;border-bottom:1px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .15s}
+.dl.open .dl-toggle::after{transform:translateY(1px) rotate(225deg)}
+.dl-menu{position:absolute;right:0;top:calc(100% + 14px);min-width:250px;background:var(--white);border:1px solid var(--line);box-shadow:0 14px 34px rgba(30,34,30,.1);padding:6px;display:none}
+.dl.open .dl-menu{display:block}
+.dl-menu a,.dl-menu .soon{display:block;padding:11px 12px;text-transform:none;letter-spacing:.01em;font-size:14px;color:var(--ink)}
+.dl-menu a:hover,.dl-menu a:focus{background:var(--panel);outline:none}
+.dl-menu small{display:block;font-size:11px;color:var(--sub);letter-spacing:.02em;margin-top:1px}
+.dl-menu .soon{color:#8a8a84;cursor:default}
+.dl-menu a[aria-current="page"]{background:var(--panel)}
+
+.eyebrow,.overline{font-size:11px;letter-spacing:.09em;font-weight:600;color:var(--green)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid #85877d;padding:10px 15px;text-decoration:none;letter-spacing:.01em;font-size:13px;font-weight:500;background:transparent;cursor:pointer;min-height:40px;color:var(--ink)}
+.btn.primary{background:#292d29;color:#fff;border-color:#292d29}
+.btn.primary:hover{background:#3a403a}
+.btn:hover{border-color:var(--ink)}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
+/* hero */
+.hero{border-bottom:1px solid var(--line);background:#efeee9;position:relative;overflow:hidden}
+.hero .shell{padding:64px 0 56px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);gap:48px;align-items:center}
+h1{font-size:clamp(31px,4.1vw,57px);line-height:1.11;letter-spacing:-.045em;font-weight:470;margin:13px 0 14px;max-width:760px}
+.lead{font-size:clamp(14px,1.55vw,19px);line-height:1.45;max-width:640px;color:#52554c}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tags span{font-size:11.5px;letter-spacing:.03em;border:1px solid var(--line);padding:5px 9px;color:var(--sub);background:var(--white)}
+.mosaic-art{aspect-ratio:1;max-width:420px;width:100%;justify-self:end;display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.mosaic-art i{display:block;border-radius:2px;opacity:.9;animation:breathe 7s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(.86)}}
+@media (prefers-reduced-motion:reduce){.mosaic-art i{animation:none}}
+
+/* sections */
+.section{padding:56px 0 30px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:18px;padding-bottom:17px;border-bottom:1px solid var(--line);margin-bottom:24px}
+.section-head span{font-size:11px;letter-spacing:.09em;font-weight:600;color:var(--sub)}
+h2{font-size:clamp(24px,2.6vw,36px);line-height:1.15;letter-spacing:-.03em;font-weight:470;max-width:760px}
+.intro{max-width:760px;color:#52554c;margin-top:12px}
+
+/* live preview */
+.preview{border:1px solid var(--line);background:var(--dark);aspect-ratio:16/10;position:relative;overflow:hidden}
+.preview iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#0d0e10}
+.preview-cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#e9efe8;text-align:center;padding:24px}
+.preview-cover p{font-size:14px;color:#b8c2b9;max-width:440px}
+.preview-cover .btn{border-color:#e9efe8;color:#e9efe8}
+.preview-cover .btn:hover{background:#e9efe8;color:var(--dark)}
+.preview-note{font-size:12px;color:var(--sub);margin-top:10px}
+
+/* features */
+.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.features div{background:var(--white);padding:22px 22px 24px}
+.features h3{font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-.005em}
+.features p{font-size:14px;line-height:1.6;color:#59605a}
+.features .overline{display:block;margin-bottom:10px}
+
+/* download */
+.download{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:28px;align-items:start}
+.dl-card{border:1px solid var(--line);background:var(--white);padding:clamp(20px,2.6vw,32px)}
+.dl-card h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
+.version{font-size:12px;color:var(--sub);margin-top:6px;letter-spacing:.03em}
+.dl-card .actions{margin-top:20px}
+.files{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--line)}
+.files li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.files li span:last-child{color:var(--sub);text-align:right}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 38px;font-size:14px;line-height:1.6;color:#4d514b}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--green);background:var(--white)}
+.steps strong{color:var(--ink)}
+.req{margin-top:20px;font-size:13px;color:var(--sub);line-height:1.6}
+.beta{margin-top:18px;border-left:2px solid var(--gold);padding:4px 0 4px 14px;font-size:13.5px;color:#59605a;line-height:1.6}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px}
+.notes div{border-top:1px solid var(--line);padding-top:12px}
+.notes strong{display:block;font-size:15px;margin-bottom:4px}
+.notes span{font-size:14px;line-height:1.55;color:#59605a}
+
+footer{background:var(--dark);color:#c4d3c7;margin-top:56px}
+footer .shell{padding:36px 0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;font-size:12px}
+footer a{color:#e9efe8;text-decoration:none;border-bottom:1px solid #576359}
+footer .brand{color:#e9efe8;border:0}
+
+@media(max-width:860px){
+  .hero .shell{grid-template-columns:1fr;padding:44px 0 40px}
+  .mosaic-art{display:none}
+  .features{grid-template-columns:1fr}
+  .download{grid-template-columns:1fr}
+  .preview{aspect-ratio:4/5}
+}
+@media(max-width:1020px){.features{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:860px){.features{grid-template-columns:1fr}}
+@media(max-width:620px){.navlinks{gap:16px}.navlinks .wide{display:none}.dl-menu{right:-8px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#download">Skip to download</a>
+<header><div class="shell nav">
+  <a aria-label="CONTINUUM home" class="brand" href="./">CONTINUUM</a>
+  <nav aria-label="Main navigation" class="navlinks">
+    <a href="./#instruments">Instruments</a>
+    <a class="wide" href="./#ethos">The work</a>
+    <a class="wide" href="./#foldspace">Fold Space</a>
+    <a class="wide" href="./#projects">Workshop</a>
+    <div class="dl">
+      <button class="dl-toggle" type="button" aria-expanded="false" aria-controls="dl-menu">Downloads</button>
+      <div class="dl-menu" id="dl-menu">
+        <a href="mosaic.html" aria-current="page">Mosaic Plugin<small>VST3 instrument · Windows</small></a>
+        <span class="soon">Fluidic FX<small>VST3 effect · page coming soon</small></span>
+      </div>
+    </div>
+  </nav>
+</div></header>
+
+<main>
+<section class="hero"><div class="shell">
+  <div>
+    <p class="eyebrow">Instrument 01 · Mosaic Subtractive / FM</p>
+    <h1>Carve with filters. Collide with frequencies.</h1>
+    <p class="lead">From seismic sub-bass and squelching acid to glassy FM bells and slow-moving soundscapes, Mosaic refuses to choose between warmth and wildness. Play it in your browser, or bring it into your DAW as a VST3 instrument.</p>
+    <div class="tags"><span>Subtractive</span><span>FM</span><span>Wavetable</span><span>VST3 · Windows</span></div>
+    <div class="actions">
+      <a class="btn primary" href="#download">Download for Windows</a>
+      <a class="btn" href="https://stefanopollina.github.io/mosaic_subtractive_fm/" rel="noopener noreferrer" target="_blank">Play in your browser ↗</a>
+    </div>
+  </div>
+  <div class="mosaic-art" aria-hidden="true" id="art"></div>
+</div></section>
+
+<section class="section shell" id="play">
+  <div class="section-head"><span>Try it first</span></div>
+  <div class="preview" id="preview">
+    <div class="preview-cover">
+      <h2 style="color:#e9efe8">The real instrument, right here.</h2>
+      <p>This loads the full Mosaic in the page. Click inside it to start the sound, and use your computer keyboard or a MIDI controller to play.</p>
+      <button class="btn" type="button" id="load-preview">Load Mosaic</button>
+    </div>
+  </div>
+  <p class="preview-note">The plugin is this same instrument: the same interface, presets and banks, with the sound made natively inside your DAW.</p>
+</section>
+
+<section class="section shell" id="inside">
+  <div class="section-head"><span>What's inside</span></div>
+  <h2>Two ways to build a sound, played at once.</h2>
+  <p class="intro">Subtractive starts rich and carves it away. FM starts pure and makes it collide. Each Mosaic layer pairs three oscillators and a deep multimode filter with FM, phase distortion or both, so a filtered bass can sit beneath a glassy bell in a single patch.</p>
+  <div class="features" style="margin-top:26px">
+    <div><span class="overline">Voices</span><h3>Subtractive × FM, in every layer</h3><p>Two layers of three oscillators with wavefolding, unison, X-MOD, sync and ring. FM and phase distortion per layer, with envelopes, glide and velocity.</p></div>
+    <div><span class="overline">Filters</span><h3>Filters that do weather</h3><p>Low-pass, high-pass, band-pass, notch, comb and formant, with drive and a blendable slope. The DRIP resonator adds droplets and rain.</p></div>
+    <div><span class="overline">Movement</span><h3>Sixteen sequenced LFOs</h3><p>Eight per layer, each with its own step sequencer: probability, ratchets, ties and slew. LFO SEQ orchestrates all sixteen across 64 steps.</p></div>
+    <div><span class="overline">TABLE</span><h3>A wavetable universe</h3><p>131 tables in 16 banks, scanned and shaped with four macros. The TABLE engine blends with the main layers or replaces them, with MOTION step lanes.</p></div>
+    <div><span class="overline">FX bus</span><h3>The final polish</h3><p>Drive, phaser, tempo delay, multiband echo, reverb with shimmer, compressor, DJ filter, chorus, ping-pong, crush, tremolo and width.</p></div>
+    <div><span class="overline">Perform</span><h3>Sequence it. Capture it.</h3><p>A note sequencer with swing and Euclidean patterns, an arpeggiator, automation lanes, the BANK performance layer, and a recorder with WAV and MIDI export.</p></div>
+  </div>
+</section>
+
+<section class="section shell" id="download">
+  <div class="section-head"><span>Download</span></div>
+  <div class="download">
+    <div class="dl-card">
+      <p class="eyebrow">Mosaic Plugin · Beta</p>
+      <h3 style="margin-top:10px">Mosaic for Windows</h3>
+      <p class="version" id="version">VST3 instrument + standalone app</p>
+      <div class="actions">
+        <a class="btn primary" id="dl-setup" href="https://github.com/stefanoPollina/MOSAIC_PLUGIN/releases/latest/download/Mosaic-Windows-Setup.exe">Download installer</a>
+        <a class="btn" id="dl-zip" href="https://github.com/stefanoPollina/MOSAIC_PLUGIN/releases/latest/download/Mosaic-Windows-Plugins.zip">Download zip</a>
+      </div>
+      <ul class="files">
+        <li><span>Mosaic-Windows-Setup.exe</span><span>Installs the VST3 and the standalone app</span></li>
+        <li><span>Mosaic-Windows-Plugins.zip</span><span>The same files, to copy by hand</span></li>
+      </ul>
+      <p class="req">Windows 10 or 11, 64-bit, with the Microsoft WebView2 runtime (already part of Windows 11 and most up-to-date Windows 10 PCs). Made for Ableton Live and FL Studio (any VST3 host should work). All releases: <a href="https://github.com/stefanoPollina/MOSAIC_PLUGIN/releases">GitHub</a>.</p>
+      <p class="beta">This is an early build. The sound engine is checked against the browser Mosaic, but the plugin is still being tried in real sessions. If something misbehaves, the browser version is always there.</p>
+    </div>
+    <div>
+      <ol class="steps">
+        <li><strong>Close your DAW</strong>, then run the installer. It puts Mosaic.vst3 in <em>C:\Program Files\Common Files\VST3</em>, where Ableton Live and FL Studio both look.</li>
+        <li><strong>Rescan your plugins.</strong> Ableton: Preferences → Plug-Ins → Rescan. FL Studio: Options → Manage plugins → Find installed plugins.</li>
+        <li><strong>Load Mosaic on an instrument track</strong> and play it from your keyboard or the piano roll. It follows your project's tempo, and its sequencer starts and stops with your transport.</li>
+        <li><strong>Save your project</strong> as usual: the sound you made is stored with it. Your own presets and banks are kept between sessions.</li>
+      </ol>
+      <div class="notes">
+        <div><strong>The same instrument</strong><span>Every preset, bank and editor from the browser version, with the sound made natively for low, steady latency.</span></div>
+        <div><strong>Works with the window closed</strong><span>The sequencer, BANK and automation keep playing when you close the plugin window.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="shell">
+  <a class="brand" href="./">CONTINUUM</a>
+  <span>Mosaic Subtractive / FM · <a href="https://stefanopollina.github.io/mosaic_subtractive_fm/" rel="noopener noreferrer" target="_blank">Play in the browser</a> · <a href="./">Back to Continuum</a></span>
+</div></footer>
+
+<script>
+// Downloads menu: click or keyboard to open, Escape or outside click to close
+(() => {
+  const dl = document.querySelector('.dl'), btn = dl.querySelector('.dl-toggle');
+  const set = (open) => { dl.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); };
+  btn.addEventListener('click', (e) => { e.stopPropagation(); set(!dl.classList.contains('open')); });
+  document.addEventListener('click', (e) => { if (!dl.contains(e.target)) set(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { set(false); btn.focus(); } });
+})();
+// a small mosaic in the hero, in the landing page's palette
+(() => {
+  const c = ['#53796c', '#aa7d4d', '#608397', '#8c759b', '#b07f70', '#242723', '#d8d5ce', '#efeee9'], art = document.getElementById('art');
+  for (let i = 0; i < 36; i++) { const t = document.createElement('i'); t.style.background = c[(i * 7 + (i >> 2)) % c.length]; t.style.animationDelay = (-(i * 0.37) % 7).toFixed(2) + 's'; art.appendChild(t); }
+})();
+// the live instrument loads only when asked (it is a full synthesizer)
+document.getElementById('load-preview').addEventListener('click', () => {
+  const f = document.createElement('iframe');
+  f.src = 'https://stefanopollina.github.io/mosaic_subtractive_fm/'; f.title = 'Mosaic Subtractive / FM'; f.allow = 'autoplay; midi; microphone';
+  const p = document.getElementById('preview'); p.innerHTML = ''; p.appendChild(f);
+});
+// show the newest release's version and size
+fetch('https://api.github.com/repos/stefanoPollina/MOSAIC_PLUGIN/releases/latest').then((r) => r.ok ? r.json() : null).then((rel) => {
+  if (!rel) return;
+  const setup = (rel.assets || []).find((a) => /Setup\.exe$/.test(a.name));
+  const date = new Date(rel.published_at).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+  document.getElementById('version').textContent = 'Version ' + rel.tag_name.replace(/^v/, '') + ' · ' + date + (setup ? ' · ' + (setup.size / 1048576).toFixed(1) + ' MB' : '');
+}).catch(() => {});
+</script>
+</body>
+</html>
