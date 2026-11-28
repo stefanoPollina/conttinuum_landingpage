@@ -663,15 +663,15 @@ article.instrument > details.instrument-details .detail-body {
     "Distinct instruments. One shared clock.",
     "Play a phrase. Leave room for an answer."
 ];
-  const hour = 3600000;
-  const firstHour = 498840;
+  const intervalMs = 30 * 60 * 1000;
+  const firstSlot = 997680;
   let timer;
   function updateHeading() {
     clearTimeout(timer);
     const now = Date.now();
-    const slot = (Math.floor(now / hour) - firstHour) % taglines.length;
+    const slot = (Math.floor(now / intervalMs) - firstSlot) % taglines.length;
     heading.textContent = taglines[(slot + taglines.length) % taglines.length];
-    timer = setTimeout(updateHeading, hour - now % hour);
+    timer = setTimeout(updateHeading, intervalMs - now % intervalMs);
   }
   updateHeading();
   document.addEventListener('visibilitychange', () => {
